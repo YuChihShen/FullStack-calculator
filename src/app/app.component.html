@@ -3,6 +3,12 @@
         <div class="output">
             <output class="mon" type="text" value="{{result}}"></output>
         </div>
+        <div class="memory">
+            <input class="btn" type="button" value="MS" (click)="memorySave()">
+            <input class="btn" type="button" value="M+" (click)="memoryPlus()">
+            <input class="btn" type="button" value="M-" (click)="memoryReduce()">
+            <input class="btn" type="button" value="MR" (click)="memoryCall()">
+        </div>
         <div class="num">
             <input class="btn" type="button" value="1" (click)="addN(1)">
             <input class="btn" type="button" value="2" (click)="addN(2)">
@@ -28,6 +34,7 @@
             <input class="btn" type="button" value="/" (click)="operator('/')"><br>
             <input class="btn" type="button" value="=" (click)="checkResult()"><br>
         </div>
+
         <br>
     </div>
 </div>

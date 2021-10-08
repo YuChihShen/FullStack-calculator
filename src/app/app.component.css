@@ -1,45 +1,43 @@
-.btn{
-   width: 60px;height: 30px; margin: 5px 5px;
+.btn {
+    width: 60px;
+    height: 30px;
+    margin: 5px 5px;
 }
-.mon{
-   font-size: 30px;
-   position: absolute;
-   top: 5px;
-   left: 30px;
-}
-.calobj{
-    
+
+.mon {
+    font-size: 30px;
     position: absolute;
-    top: 60px;
+    top: 5px;
+    left: 30px;
+}
+
+.calobj {
+    position: relative;
+    top: -160px;
     left: 210px;
 }
-.num{
-    position: absolute;
-    top: 60px; 
-}
-.output{
-    border-style: solid ;
-    border-width: 1px;   
+
+.output {
+    border-style: solid;
+    border-width: 1px;
     border-radius: 10px;
-    height: 40px;width: 280px;
+    height: 40px;
+    width: 280px;
 }
-.border{
-    border-style: solid ;
-    border-width: 1px;   
+
+.border {
+    border-style: solid;
+    border-width: 1px;
     border-radius: 10px;
     position: absolute;
     left: 15px;
     top: 20px;
-    width: 330px;height: 310px;
+    width: 330px;
+    height: 310px;
 }
-.main{
+
+.main {
     position: absolute;
     left: 25px;
-    top:20px;
+    top: 20px;
 }
-
-
-
-
-
-
