@@ -4,6 +4,12 @@
     margin: 5px 5px;
 }
 
+.btnM {
+    width: 46px;
+    height: 30px;
+    margin: 5px 5px;
+}
+
 .mon {
     font-size: 30px;
     position: absolute;

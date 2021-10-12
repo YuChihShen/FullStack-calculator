@@ -70,7 +70,7 @@ export class AppComponent {
         this.renew();
         break;
     }
-    console.log(this.nums,this.operators,this.num);
+    //console.log(this.nums,this.operators,this.num);
   }
   //清除所有數據
   clearN() {
@@ -114,30 +114,34 @@ export class AppComponent {
       }
     }
     this.renew();
-    console.log(this.nums,this.operators,this.num);
   }
   //記憶功能
   memorySave(){
     this.checkResult();
     this.memorys[this.memorys.length] = this.result;
+    console.log(this.memorys);
   }
   memoryPlus(){
     this.checkResult();
     let s = parseFloat(this.memorys[0]) + parseFloat(this.result);
     this.memorys[0] = s.toString();
+    console.log(this.memorys);
   }
   memoryReduce(){
     this.checkResult();
     let s = parseFloat(this.memorys[0]) - parseFloat(this.result);
     this.memorys[0] = s.toString();
+    console.log(this.memorys);
   }
   memoryClean(){
     this.memorys=[];
+    console.log(this.memorys);
   }
   memoryCall(){
     this.clearN();
     this.num = this.memorys[0];
     this.renew();
+    console.log(this.memorys);
   }
 
 }
