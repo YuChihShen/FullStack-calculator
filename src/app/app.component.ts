@@ -1,3 +1,4 @@
+import { prepareSyntheticListenerFunctionName } from '@angular/compiler/src/render3/util';
 import { Component } from '@angular/core';
 
 
@@ -13,6 +14,7 @@ export class AppComponent {
   private num = '';
   private operators: string[] = [];
   private memorys: string[] = [];
+  private saveSign = '';
 
   //更新顯示數字
   private renew() {
@@ -87,6 +89,7 @@ export class AppComponent {
     if (this.nums[this.nums.length - 1] === '') {
       this.operators.pop();
     }
+
     for (let i = 0; i < this.operators.length; i++) {
       if (this.operators[i] == '*') {
         this.nums[i] = (parseFloat(this.nums[i]) * parseFloat(this.nums[i + 1])).toString();
@@ -113,8 +116,10 @@ export class AppComponent {
         i--;
       }
     }
+    if (this.nums[this.nums.length - 1] === '') {
+      this.nums.pop();
+    }
     this.renew();
-    console.log(this.nums, this.operators, this.num);
   }
   //記憶功能
   memorySave() {
@@ -175,6 +180,32 @@ export class AppComponent {
     this.renew();
   }
   test() {
-    console.log(Boolean(this.num));
+   
+  
   }
+  writefile() {
+    if (!localStorage.getItem('0' + 'nums' + this.saveSign)) {
+      for (let i = 0; i < this.nums.length; i++) {
+        localStorage.setItem(i.toString() + 'nums', this.nums[i]);
+      }
+      for (let j = 0; j < this.operators.length; j++) {
+        localStorage.setItem(j.toString() + 'operators', this.operators[j]);
+      }
+      
+    } else {
+      this.saveSign += '*';
+      this.writefile();
+    }
+  }
+  readfile() {
+    if (!localStorage.getItem('0' + 'nums' + this.saveSign)){
+      for (let i = 0; i < this.saveSign.length; i++) {
+      break;
+    }
+    }
+    
+
+  }
+
 }
+

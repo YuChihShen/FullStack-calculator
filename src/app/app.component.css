@@ -6,7 +6,8 @@
     margin: 5px 5px;
 }
 
-.memory>input {
+.memory>input,
+.math>button {
     width: 46px;
     height: 30px;
     margin: 5px 5px;
@@ -41,7 +42,7 @@
     left: 15px;
     top: 20px;
     width: 330px;
-    height: 310px;
+    height: 350px;
 }
 
 .main {
