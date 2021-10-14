@@ -9,30 +9,30 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   result = '';
-  nums:string[]= [];
-  num = '';
-  operators:string[]= [];
-  memorys:string[]= [];
+  private nums: string[] = [];
+  private num = '';
+  private operators: string[] = [];
+  private memorys: string[] = [];
 
   //更新顯示數字
-  renew(){
-    this.result='';
-    if(this.nums.length>0){
-    for(let i=0;i<this.nums.length;i++){
-      if(this.operators.length>0){
-      this.result+=(this.nums[i]+this.operators[i]);
-      }else{
-        this.result+=this.nums[i]
+  private renew() {
+    this.result = '';
+    if (this.nums.length > 0) {
+      for (let i = 0; i < this.nums.length; i++) {
+        if (this.operators.length > 0) {
+          this.result += (this.nums[i] + this.operators[i]);
+        } else {
+          this.result += this.nums[i]
+        }
       }
     }
-  }
-    this.result+=this.num;
+    this.result += this.num;
   }
   // 數字功能
   addN(value: number) {
-   if(this.num == '0'){
-     this.num = '';
-   }
+    if (this.num == '0') {
+      this.num = '';
+    }
     value.toString;
     this.num += value;
     this.renew();
@@ -42,31 +42,31 @@ export class AppComponent {
     if (this.num.indexOf('.') == -1) {
       this.num += '.';
       this.renew();
-    } 
+    }
   }
   // 運算子功能
-  operator(value: string){
-    if(this.num ===''){
-      this.num='0';
-   }else{
-      this.nums[this.nums.length] = this.num ;
+  operator(value: string) {
+    if (this.num === '') {
+      this.num = '0';
+    } else {
+      this.nums[this.nums.length] = this.num;
       this.num = '';
-   }
+    }
     switch (value) {
       case '+':
-        this.operators[this.operators.length]='+';
+        this.operators[this.operators.length] = '+';
         this.renew();
         break;
       case '-':
-        this.operators[this.operators.length]='-';
+        this.operators[this.operators.length] = '-';
         this.renew();
         break;
       case '*':
-        this.operators[this.operators.length]='*';
+        this.operators[this.operators.length] = '*';
         this.renew();
         break;
       case '/':
-        this.operators[this.operators.length]='/';
+        this.operators[this.operators.length] = '/';
         this.renew();
         break;
     }
@@ -74,74 +74,107 @@ export class AppComponent {
   }
   //清除所有數據
   clearN() {
-   this.result = '';
-   this.nums= [];
-   this.num = '';
-   this.operators= [];
-   
+    this.result = '';
+    this.nums = [];
+    this.num = '';
+    this.operators = [];
+
   }
   //計算結果
-  checkResult(){
-    this.nums[this.nums.length] = this.num ;
+  checkResult() {
+    this.nums[this.nums.length] = this.num;
     this.num = '';
-    if(this.nums[this.nums.length-1]===''){
+    if (this.nums[this.nums.length - 1] === '') {
       this.operators.pop();
     }
-    for(let i=0;i<this.operators.length;i++){
-      if(this.operators[i]=='*'){
-        this.nums[i]= (parseFloat(this.nums[i])*parseFloat(this.nums[i+1])).toString(); 
-        this.nums.splice(i+1,1)
-        this.operators.splice(i,1);
-        i--;     
-      }else if(this.operators[i]=='/'){
-        this.nums[i]= (parseFloat(this.nums[i])/parseFloat(this.nums[i+1])).toString();
-        this.nums.splice(i+1,1)
-        this.operators.splice(i,1);
+    for (let i = 0; i < this.operators.length; i++) {
+      if (this.operators[i] == '*') {
+        this.nums[i] = (parseFloat(this.nums[i]) * parseFloat(this.nums[i + 1])).toString();
+        this.nums.splice(i + 1, 1)
+        this.operators.splice(i, 1);
+        i--;
+      } else if (this.operators[i] == '/') {
+        this.nums[i] = (parseFloat(this.nums[i]) / parseFloat(this.nums[i + 1])).toString();
+        this.nums.splice(i + 1, 1)
+        this.operators.splice(i, 1);
         i--;
       }
     }
-    for(let i=0;i<this.operators.length;i++){
-      if(this.operators[i]=='+'){
-        this.nums[i]= (parseFloat(this.nums[i])+parseFloat(this.nums[i+1])).toString(); 
-        this.nums.splice(i+1,1)
-        this.operators.splice(i,1);
-        i--;     
-      }else if(this.operators[i]=='-'){
-        this.nums[i]= (parseFloat(this.nums[i])-parseFloat(this.nums[i+1])).toString();
-        this.nums.splice(i+1,1)
-        this.operators.splice(i,1);
+    for (let i = 0; i < this.operators.length; i++) {
+      if (this.operators[i] == '+') {
+        this.nums[i] = (parseFloat(this.nums[i]) + parseFloat(this.nums[i + 1])).toString();
+        this.nums.splice(i + 1, 1)
+        this.operators.splice(i, 1);
+        i--;
+      } else if (this.operators[i] == '-') {
+        this.nums[i] = (parseFloat(this.nums[i]) - parseFloat(this.nums[i + 1])).toString();
+        this.nums.splice(i + 1, 1)
+        this.operators.splice(i, 1);
         i--;
       }
     }
     this.renew();
+    console.log(this.nums, this.operators, this.num);
   }
   //記憶功能
-  memorySave(){
+  memorySave() {
     this.checkResult();
     this.memorys[this.memorys.length] = this.result;
     console.log(this.memorys);
   }
-  memoryPlus(){
+  memoryPlus() {
     this.checkResult();
     let s = parseFloat(this.memorys[0]) + parseFloat(this.result);
     this.memorys[0] = s.toString();
     console.log(this.memorys);
   }
-  memoryReduce(){
+  memoryReduce() {
     this.checkResult();
     let s = parseFloat(this.memorys[0]) - parseFloat(this.result);
     this.memorys[0] = s.toString();
     console.log(this.memorys);
   }
-  memoryClean(){
-    this.memorys=[];
+  memoryClean() {
+    this.memorys = [];
     console.log(this.memorys);
   }
-  memoryCall(){
+  memoryCall() {
     this.clearN();
     this.num = this.memorys[0];
     this.renew();
     console.log(this.memorys);
   }
-
+  square() {
+    if (parseFloat(this.num)) {
+      let s = parseFloat(this.num) ** 2;
+      this.num = s.toString();
+    } else if (parseFloat(this.nums[0])) {
+      let s = parseFloat(this.nums[0]) ** 2;
+      this.nums[0] = s.toString();
+    }
+    this.renew();
+  }
+  root() {
+    if (parseFloat(this.num)) {
+      let s = parseFloat(this.num) ** 0.5;
+      this.num = s.toString();
+    } else if (parseFloat(this.nums[0])) {
+      let s = parseFloat(this.nums[0]) ** 0.5;
+      this.nums[0] = s.toString();
+    }
+    this.renew();
+  }
+  log() {
+    if (parseFloat(this.num)) {
+      let s = Math.log10(parseFloat(this.num));
+      this.num = s.toString();
+    } else if (parseFloat(this.nums[0])) {
+      let s = Math.log10(parseFloat(this.nums[0]));
+      this.nums[0] = s.toString();
+    }
+    this.renew();
+  }
+  test() {
+    console.log(Boolean(this.num));
+  }
 }
