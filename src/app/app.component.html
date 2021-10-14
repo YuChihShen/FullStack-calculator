@@ -4,36 +4,57 @@
             <output class="mon" type="text" value="{{result}}"></output>
         </div>
         <div class="memory">
-            <input class="btnM" type="button" value="MS" (click)="memorySave()">
-            <input class="btnM" type="button" value="M+" (click)="memoryPlus()">
-            <input class="btnM" type="button" value="M-" (click)="memoryReduce()">
-            <input class="btnM" type="button" value="MR" (click)="memoryCall()">
-            <input class="btnM" type="button" value="MC" (click)="memoryClean()">
+            <input type="button" value="MS" (click)="memorySave()" />
+            <input type="button" value="M+" (click)="memoryPlus()" />
+            <input type="button" value="M-" (click)="memoryReduce()" />
+            <input type="button" value="MR" (click)="memoryCall()" />
+            <input type="button" value="MC" (click)="memoryClean()" />
+        </div>
+        <div>
+            <button (click)="square()">squ</button>
+            <button (click)="root()">root</button>
+            <button (click)="log()">log</button>
+            <button (click)="test()">test</button>
         </div>
         <div class="num">
-            <input class="btn" type="button" value="1" (click)="addN(1)">
-            <input class="btn" type="button" value="2" (click)="addN(2)">
-            <input class="btn" type="button" value="3" (click)="addN(3)">
-            <br>
-            <input class="btn" type="button" value="4" (click)="addN(4)">
-            <input class="btn" type="button" value="5" (click)="addN(5)">
-            <input class="btn" type="button" value="6" (click)="addN(6)">
-            <br>
-            <input class="btn" type="button" value="7" (click)="addN(7)">
-            <input class="btn" type="button" value="8" (click)="addN(8)">
-            <input class="btn" type="button" value="9" (click)="addN(9)">
-            <br>
-            <input class="btn" type="button" value="c" (click)="clearN()">
-            <input class="btn" type="button" value="0" (click)="addN(0)">
-            <input class="btn" type="button" value="." (click)="dot()">
-            <br>
+            <div>
+                <button (click)="addN(1)">1</button>
+                <!-- <input type="button" value="1" (click)="addN(1)"/> -->
+                <input type="button" value="2" (click)="addN(2)" />
+                <input type="button" value="3" (click)="addN(3)" />
+            </div>
+            <div>
+                <input type="button" value="4" (click)="addN(4)" />
+                <input type="button" value="5" (click)="addN(5)" />
+                <input type="button" value="6" (click)="addN(6)" />
+            </div>
+            <div>
+                <input type="button" value="7" (click)="addN(7)" />
+                <input type="button" value="8" (click)="addN(8)" />
+                <input type="button" value="9" (click)="addN(9)" />
+            </div>
+            <div>
+                <input type="button" value="C" (click)="clearN()" />
+                <input type="button" value="0" (click)="addN(0)" />
+                <input type="button" value="." (click)="dot()" />
+            </div>
         </div>
         <div class="calobj">
-            <input class="btn" type="button" value="+" (click)="operator('+')"><br>
-            <input class="btn" type="button" value="-" (click)="operator('-')"><br>
-            <input class="btn" type="button" value="*" (click)="operator('*')"><br>
-            <input class="btn" type="button" value="/" (click)="operator('/')"><br>
-            <input class="btn" type="button" value="=" (click)="checkResult()"><br>
+            <div>
+                <input type="button" value="+" (click)="operator('+')" />
+            </div>
+            <div>
+                <input type="button" value="-" (click)="operator('-')" />
+            </div>
+            <div>
+                <input type="button" value="*" (click)="operator('*')" />
+            </div>
+            <div>
+                <input type="button" value="/" (click)="operator('/')" />
+            </div>
+            <div>
+                <input type="button" value="=" (click)="checkResult()" />
+            </div>
         </div>
 
         <br>

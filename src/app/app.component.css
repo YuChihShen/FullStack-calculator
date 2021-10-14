@@ -1,10 +1,12 @@
-.btn {
+.num>div>input,
+.calobj>div>input,
+.num>div>button {
     width: 60px;
     height: 30px;
     margin: 5px 5px;
 }
 
-.btnM {
+.memory>input {
     width: 46px;
     height: 30px;
     margin: 5px 5px;
