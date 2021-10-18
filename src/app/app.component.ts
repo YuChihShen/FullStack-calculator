@@ -14,7 +14,7 @@ export class AppComponent {
   private num = '';
   private operators: string[] = [];
   private memorys: string[] = [];
-  private saveSign = '';
+
 
   //更新顯示數字
   private renew() {
@@ -180,31 +180,22 @@ export class AppComponent {
     this.renew();
   }
   test() {
-   
-  
+    let s = localStorage.getItem('saveSign');
+    console.log(s)
+
   }
   writefile() {
-    if (!localStorage.getItem('0' + 'nums' + this.saveSign)) {
-      for (let i = 0; i < this.nums.length; i++) {
-        localStorage.setItem(i.toString() + 'nums', this.nums[i]);
-      }
-      for (let j = 0; j < this.operators.length; j++) {
-        localStorage.setItem(j.toString() + 'operators', this.operators[j]);
-      }
-      
-    } else {
-      this.saveSign += '*';
-      this.writefile();
+    let saveSign = localStorage.getItem('saveSign');
+    localStorage.setItem('saveSign', saveSign + '*');
+    for (let i = 0; i < this.nums.length; i++) {
+      localStorage.setItem(i.toString() + 'nums' + saveSign, this.nums[i]);
+    }
+    for (let j = 0; j < this.operators.length; j++) {
+      localStorage.setItem(j.toString() + 'operators' + saveSign, this.operators[j]);
     }
   }
-  readfile() {
-    if (!localStorage.getItem('0' + 'nums' + this.saveSign)){
-      for (let i = 0; i < this.saveSign.length; i++) {
-      break;
-    }
-    }
+  recordfile(){
     
-
   }
 
 }
