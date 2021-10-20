@@ -1,15 +1,17 @@
 import { prepareSyntheticListenerFunctionName } from '@angular/compiler/src/render3/util';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
 
   result = '';
+  data = '';
   private nums: string[] = [];
   private num = '';
   private operators: string[] = [];
@@ -89,7 +91,7 @@ export class AppComponent {
     if (this.nums[this.nums.length - 1] === '') {
       this.operators.pop();
     }
-
+    this.writefile();this.readfile();
     for (let i = 0; i < this.operators.length; i++) {
       if (this.operators[i] == '*') {
         this.nums[i] = (parseFloat(this.nums[i]) * parseFloat(this.nums[i + 1])).toString();
@@ -120,6 +122,7 @@ export class AppComponent {
       this.nums.pop();
     }
     this.renew();
+    //console.log(this.nums, this.operators, this.num);
   }
   //記憶功能
   memorySave() {
@@ -180,13 +183,16 @@ export class AppComponent {
     this.renew();
   }
   test() {
-    let s = localStorage.getItem('saveSign');
-    console.log(s)
-
+    localStorage.clear();
   }
   writefile() {
     let saveSign = localStorage.getItem('saveSign');
-    localStorage.setItem('saveSign', saveSign + '*');
+    if(saveSign!==null){
+      localStorage.setItem('saveSign', saveSign + '*');
+    }else{
+      localStorage.setItem('saveSign','*');
+    }
+    saveSign = localStorage.getItem('saveSign');
     for (let i = 0; i < this.nums.length; i++) {
       localStorage.setItem(i.toString() + 'nums' + saveSign, this.nums[i]);
     }
@@ -194,9 +200,35 @@ export class AppComponent {
       localStorage.setItem(j.toString() + 'operators' + saveSign, this.operators[j]);
     }
   }
-  recordfile(){
-    
-  }
+  readfile() {
+    console.log(localStorage.valueOf()) ;
+    let saveSign = localStorage.getItem('saveSign');
+    console.log(saveSign);
+    let buttons = '';
+    let formula ='';
+    let s =0;
+    if (saveSign) {
+      for (let i = saveSign.length; i > 0; i--) {
+        while(localStorage.getItem(s.toString()+'nums'+ saveSign)){
+          formula +=localStorage.getItem(s.toString()+'nums'+ saveSign);
+          if(localStorage.getItem(s.toString()+'operators'+ saveSign)){
+            formula +=localStorage.getItem(s.toString()+'operators'+ saveSign);
+          }else{
+            formula += '=';
+            buttons+='<button class="data">'+formula+'</button>';
+            console.log(buttons);
+            s=0;
+            formula ='';
+            break;
+          }
+          s++;
+        }
+        
+      }
+    }
+    const element: HTMLElement = document.getElementById('data') as HTMLElement
+    element.innerHTML = buttons;
 
+  }
 }
 

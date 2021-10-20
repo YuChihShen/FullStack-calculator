@@ -50,3 +50,21 @@
     left: 25px;
     top: 20px;
 }
+
+.dataRecord {
+    position: absolute;
+    top: 5px;
+    left: 400px;
+}
+
+.data {
+    border-style: none;
+    opacity: 0;
+    width: 400px;
+    height: 50px;
+}
+
+.data:hover {
+    background-color: aqua;
+    opacity: 0.8;
+}
