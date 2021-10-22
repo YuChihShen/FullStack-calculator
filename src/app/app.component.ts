@@ -11,7 +11,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 export class AppComponent {
 
   result = '';
-  data = '';
+  load1='null';load2='null';load3='null';load4='null';load5='null';
   private nums: string[] = [];
   private num = '';
   private operators: string[] = [];
@@ -88,10 +88,11 @@ export class AppComponent {
   checkResult() {
     this.nums[this.nums.length] = this.num;
     this.num = '';
+    let n = this.nums.length;
     if (this.nums[this.nums.length - 1] === '') {
       this.operators.pop();
     }
-    this.writefile();this.readfile();
+    this.writefile();
     for (let i = 0; i < this.operators.length; i++) {
       if (this.operators[i] == '*') {
         this.nums[i] = (parseFloat(this.nums[i]) * parseFloat(this.nums[i + 1])).toString();
@@ -121,8 +122,11 @@ export class AppComponent {
     if (this.nums[this.nums.length - 1] === '') {
       this.nums.pop();
     }
+    localStorage.setItem(n.toString()+ 'nums' + localStorage.getItem('saveSign'), this.nums[0]);
+    localStorage.setItem((n-1).toString()+ 'operators' + localStorage.getItem('saveSign'), "=");
     this.renew();
-    //console.log(this.nums, this.operators, this.num);
+    this.readfile();
+    console.log("nums:"+this.nums, "op:"+this.operators, "%:"+this.num);
   }
   //記憶功能
   memorySave() {
@@ -184,27 +188,37 @@ export class AppComponent {
   }
   test() {
     localStorage.clear();
+    this.load1=this.load2=this.load3=this.load4=this.load5='null'
   }
   writefile() {
     let saveSign = localStorage.getItem('saveSign');
-    if(saveSign!==null){
-      localStorage.setItem('saveSign', saveSign + '*');
+    let nlen = this.nums.length;
+    let olen = this.operators.length;
+    if(saveSign===null||saveSign.length>=5){
+      localStorage.setItem('saveSign', '*');
     }else{
-      localStorage.setItem('saveSign','*');
+      localStorage.setItem('saveSign',saveSign+'*');
     }
     saveSign = localStorage.getItem('saveSign');
     for (let i = 0; i < this.nums.length; i++) {
       localStorage.setItem(i.toString() + 'nums' + saveSign, this.nums[i]);
     }
+    while(localStorage.getItem(nlen.toString()+'nums' + saveSign)){
+      //console.log("dnum:"+localStorage.getItem(nlen.toString()+'nums' + saveSign));
+      localStorage.removeItem((nlen).toString()+'nums' + saveSign);
+      nlen++;
+    }
     for (let j = 0; j < this.operators.length; j++) {
       localStorage.setItem(j.toString() + 'operators' + saveSign, this.operators[j]);
     }
+    while(localStorage.getItem(olen.toString()+'operators' + saveSign)){
+      localStorage.removeItem((olen).toString()+'operators' + saveSign);
+      olen++;
+    }
+    console.log(localStorage.valueOf());
   }
   readfile() {
-    console.log(localStorage.valueOf()) ;
     let saveSign = localStorage.getItem('saveSign');
-    console.log(saveSign);
-    let buttons = '';
     let formula ='';
     let s =0;
     if (saveSign) {
@@ -214,21 +228,34 @@ export class AppComponent {
           if(localStorage.getItem(s.toString()+'operators'+ saveSign)){
             formula +=localStorage.getItem(s.toString()+'operators'+ saveSign);
           }else{
-            formula += '=';
-            buttons+='<button class="data">'+formula+'</button>';
-            console.log(buttons);
-            s=0;
-            formula ='';
             break;
           }
-          s++;
+          s++; 
         }
-        
+        console.log(saveSign);
+        switch(saveSign.length){
+          case 1:this.load1 = formula; break;
+          case 2:this.load2 = formula;break;
+          case 3:this.load3 = formula;break;
+          case 4:this.load4 = formula;break;
+          case 5:this.load5 = formula;break;
+        }
+        formula ='';
+        s=0;
       }
     }
-    const element: HTMLElement = document.getElementById('data') as HTMLElement
-    element.innerHTML = buttons;
-
+  }
+  loadfile(filename: string){
+    let s = '';
+    this.clearN();
+    switch(filename){
+      case "file1": s += localStorage.getItem("1"+"nums*"); break;
+      case "file2":break;
+      case "file3":break;
+      case "file4":break;
+      case "file5":break;
+    }
+    this.renew();
   }
 }
 
