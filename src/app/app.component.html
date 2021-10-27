@@ -14,8 +14,8 @@
             <button (click)="square()">squ</button>
             <button (click)="root()">root</button>
             <button (click)="log()">log</button>
-            <button (click)="test()">test</button>
-            <button (click)="readfile()">load</button>
+            <button (click)="cleanFile()">Cfile</button>
+
         </div>
         <div class="num">
             <div>
@@ -62,10 +62,10 @@
 </div>
 <div class="dataRecord">
     <div id="data">
-        <button class="data">{{load1}}</button>
-        <button class="data">{{load2}}</button>
-        <button class="data">{{load3}}</button>
-        <button class="data">{{load4}}</button>
-        <button class="data">{{load5}}</button>
+        <button class="data" (click)="loadfile('file1')">{{load1}}</button><br>
+        <button class="data" (click)="loadfile('file2')">{{load2}}</button><br>
+        <button class="data" (click)="loadfile('file3')">{{load3}}</button><br>
+        <button class="data" (click)="loadfile('file4')">{{load4}}</button><br>
+        <button class="data" (click)="loadfile('file5')">{{load5}}</button><br>
     </div>
 </div>

@@ -122,7 +122,7 @@ export class AppComponent {
     if (this.nums[this.nums.length - 1] === '') {
       this.nums.pop();
     }
-    localStorage.setItem(n.toString()+ 'nums' + localStorage.getItem('saveSign'), this.nums[0]);
+    localStorage.setItem('-1nums' + localStorage.getItem('saveSign'), this.nums[0]);
     localStorage.setItem((n-1).toString()+ 'operators' + localStorage.getItem('saveSign'), "=");
     this.renew();
     this.readfile();
@@ -186,7 +186,7 @@ export class AppComponent {
     }
     this.renew();
   }
-  test() {
+  cleanFile() {
     localStorage.clear();
     this.load1=this.load2=this.load3=this.load4=this.load5='null'
   }
@@ -228,13 +228,15 @@ export class AppComponent {
           if(localStorage.getItem(s.toString()+'operators'+ saveSign)){
             formula +=localStorage.getItem(s.toString()+'operators'+ saveSign);
           }else{
+            formula +=localStorage.getItem('-1nums'+ saveSign); 
             break;
           }
           s++; 
         }
         console.log(saveSign);
+        formula +=localStorage.getItem('-1nums'+ saveSign);
         switch(saveSign.length){
-          case 1:this.load1 = formula; break;
+          case 1:this.load1 = formula;break;
           case 2:this.load2 = formula;break;
           case 3:this.load3 = formula;break;
           case 4:this.load4 = formula;break;
@@ -249,13 +251,20 @@ export class AppComponent {
     let s = '';
     this.clearN();
     switch(filename){
-      case "file1": s += localStorage.getItem("1"+"nums*"); break;
-      case "file2":break;
-      case "file3":break;
-      case "file4":break;
-      case "file5":break;
+      case "file1": s += localStorage.getItem("-1nums*"); break;
+      case "file2": s += localStorage.getItem("-1nums**");break;
+      case "file3": s += localStorage.getItem("-1nums***");break;
+      case "file4": s += localStorage.getItem("-1nums****");break;
+      case "file5": s += localStorage.getItem("-1nums*****");break;
     }
+    this.nums[0] = s;
+    s='';
     this.renew();
+  }
+  info(){
+    const element: HTMLElement = document.getElementById('info') as HTMLElement
+    element.innerHTML = '123';
+
   }
 }
 
