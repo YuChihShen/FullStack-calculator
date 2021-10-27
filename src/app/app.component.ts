@@ -16,7 +16,7 @@ export class AppComponent {
   private num = '';
   private operators: string[] = [];
   private memorys: string[] = [];
-
+  private infoClickNum = 0;
 
   //更新顯示數字
   private renew() {
@@ -190,7 +190,7 @@ export class AppComponent {
     localStorage.clear();
     this.load1=this.load2=this.load3=this.load4=this.load5='null'
   }
-  writefile() {
+  private writefile() {
     let saveSign = localStorage.getItem('saveSign');
     let nlen = this.nums.length;
     let olen = this.operators.length;
@@ -217,7 +217,7 @@ export class AppComponent {
     }
     console.log(localStorage.valueOf());
   }
-  readfile() {
+  private readfile() {
     let saveSign = localStorage.getItem('saveSign');
     let formula ='';
     let s =0;
@@ -261,10 +261,28 @@ export class AppComponent {
     s='';
     this.renew();
   }
-  info(){
-    const element: HTMLElement = document.getElementById('info') as HTMLElement
-    element.innerHTML = '123';
+  // private info(){
+  //   const element: HTMLElement = document.getElementById('info') as HTMLElement
+  //   let author = 'YuChih';
+  //   let version = '計算機第三版10.27.02' ;
+  //   let lastupdate = '10/27';
+  //   element.innerHTML = '作者:'+author+'<br>'+'版本:'+version+'<br>'+'上次更新:'+lastupdate;
+  // }
 
+  infoControl(){
+    const element: HTMLElement = document.getElementById('info') as HTMLElement
+    let author = 'YuChih';
+    let version = '計算機第三版10.27.02' ;
+    let lastupdate = '10/27';
+    
+    if(this.infoClickNum===0){
+      element.innerHTML = '作者:'+author+'<br>'+'版本:'+version+'<br>'+'上次更新:'+lastupdate;
+      this.infoClickNum++;
+    }else{
+     element.innerHTML = '';
+      this.infoClickNum =0;
+    }
   }
+
 }
 
